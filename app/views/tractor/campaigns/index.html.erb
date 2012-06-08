@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1>Campaigns</h1>
+</div>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Title</th>
+    <th>Campaign key</th>
+    <th></th>
+  </tr>
+
+<% @campaigns.each do |campaign| %>
+  <tr>
+    <td><%= campaign.title %></td>
+    <td><%= campaign.campaign_key %></td>
+    <td><%= link_to 'Show', campaign %> |
+    <%= link_to 'Edit', edit_campaign_path(campaign) %> | 
+    <%= link_to 'Destroy', campaign, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Campaign', new_campaign_path, :class => 'btn btn-info' %>

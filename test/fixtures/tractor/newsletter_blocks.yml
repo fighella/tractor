@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  block_key: MyString
+  newsletter_id: 1
+  sort_order: 1
+  status: 1
+  main_title: MyString
+  secondary_title: MyString
+  main_link: MyString
+  anchor_text: MyString
+  main_image: MyString
+  body: MyText
+
+two:
+  block_key: MyString
+  newsletter_id: 1
+  sort_order: 1
+  status: 1
+  main_title: MyString
+  secondary_title: MyString
+  main_link: MyString
+  anchor_text: MyString
+  main_image: MyString
+  body: MyText

@@ -1,0 +1,9 @@
+  <a href="<%= block_content.main_link %><%= tracking_code %>" border="0">
+    <img src="<%= block_content.main_image.blank? ? '/assets/default_hero.jpg' : block_content.main_image.main.url %>" width="440" style="border-bottom: 3px solid red; border: 0">
+  </a>
+
+<h1 style="font: 22px sans-serif; color:#333; margin: 10px 0; letter-spacing: .001em; line-height: 30px">
+  <%= block_content.main_title %>
+</h1>
+
+<%= raw(RedCloth.new(cleaned_for_news(block_content.body, tracking_code)).to_html) %>

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Block key:</b>
+  <%= @newsletter_block.block_key %>
+</p>
+
+<p>
+  <b>Newsletter:</b>
+  <%= @newsletter_block.newsletter_id %>
+</p>
+
+<p>
+  <b>Sort order:</b>
+  <%= @newsletter_block.sort_order %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @newsletter_block.status %>
+</p>
+
+<p>
+  <b>Main title:</b>
+  <%= @newsletter_block.main_title %>
+</p>
+
+<p>
+  <b>Secondary title:</b>
+  <%= @newsletter_block.secondary_title %>
+</p>
+
+<p>
+  <b>Main link:</b>
+  <%= @newsletter_block.main_link %>
+</p>
+
+<p>
+  <b>Anchor text:</b>
+  <%= @newsletter_block.anchor_text %>
+</p>
+
+<p>
+  <b>Main image:</b>
+  <%= @newsletter_block.main_image %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @newsletter_block.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_newsletter_block_path(@newsletter_block) %> |
+<%= link_to 'Back', newsletter_blocks_path %>

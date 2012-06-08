@@ -1,0 +1,36 @@
+
+<%= content_for(:content) do %>
+
+  <%= render 'tractor_primary_nav' %> 
+  <div style="background: #ffffff;">
+    <div class="container">
+      <%= yield %>
+    </div>
+    <br/>
+  </div>
+
+<% end %>
+
+<%= render :file => 'layouts/application' %>
+<script>
+  $('a#tab1').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
+  $('.send_test_button').ajaxSuccess( function() {  
+    $(this).append(' - Email Sent!', function() {
+      // Animation complete.
+    });
+
+  });
+  $('.delete_newsletter').click(function(e) {
+    e.preventDefault();
+  });
+
+  $('.delete_newsletter').ajaxSuccess( function() {
+    $(this).closest('tr').fadeOut();
+  });
+  $('#myModal').modal('hide');
+
+</script>  

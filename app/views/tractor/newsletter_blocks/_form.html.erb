@@ -1,0 +1,57 @@
+<%= form_for(@newsletter_block) do |f| %>
+  <% if @newsletter_block.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@newsletter_block.errors.count, "error") %> prohibited this newsletter_block from being saved:</h2>
+
+      <ul>
+      <% @newsletter_block.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :block_key %><br />
+    <%= f.text_field :block_key %>
+  </div>
+  <div class="field">
+    <%= f.label :newsletter_id %><br />
+    <%= f.number_field :newsletter_id %>
+  </div>
+  <div class="field">
+    <%= f.label :sort_order %><br />
+    <%= f.number_field :sort_order %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :main_title %><br />
+    <%= f.text_field :main_title %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_title %><br />
+    <%= f.text_field :secondary_title %>
+  </div>
+  <div class="field">
+    <%= f.label :main_link %><br />
+    <%= f.text_field :main_link %>
+  </div>
+  <div class="field">
+    <%= f.label :anchor_text %><br />
+    <%= f.text_field :anchor_text %>
+  </div>
+  <div class="field">
+    <%= f.label :main_image %><br />
+    <%= f.text_field :main_image %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

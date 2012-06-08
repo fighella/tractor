@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  content: MyText
+  tracking_code: MyString
+  subject_line: MyString
+  status: 1
+  preheader: MyString
+  sections: 1
+
+two:
+  title: MyString
+  content: MyText
+  tracking_code: MyString
+  subject_line: MyString
+  status: 1
+  preheader: MyString
+  sections: 1

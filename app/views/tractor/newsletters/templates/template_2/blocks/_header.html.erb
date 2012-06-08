@@ -1,0 +1,40 @@
+<table style="background: none; border: none; margin: 0 auto 10px auto; padding: 0; color: #bbb; font-size: 10px; font-weight: normal; font-family: sans-serif; line-height: 14px; width: 700px;" align="center" width="700"> 
+  <tr> 
+    <td style="border: none; margin: 0; padding: 0;" width="20"> 
+    </td> 
+    <td style="border: none; color: #bebebe; font-size: 10px; font-weight: normal; font-family: sans-serif" width="300"> 
+      
+      Hi [FirstName1,fallback=there], <%= @newsletter.preheader != '' ? @newsletter.preheader : "We've got some great new stuff from Courses Now. We thought you might be interested..." %>
+      
+    </td> 
+    <td style="border: none;"  width="80"> 
+    </td> 
+    <td style="border: none; color: #bebebe; font-size: 10px; font-weight: normal; font-family: sans-serif">Is this email not displaying correctly?<br/><webversion style="color: #fff;text-decoration: none;border: none; font-size: 11px;"><span style="color: #fff;text-decoration: none;border: none;font-size: 11px;">View it in your browser.</span></webversion>
+    </td> 
+    <td style="border: none;"  width="20"> </td> 
+  </tr> 
+</table> 
+<table class="newsie" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" align="center" style="margin: 0 auto; padding: 0; width:700px; border: none; background: #ffffff;" width="700"> 
+  <tr> 
+    <td style="margin: 0; padding: 0; width: 100%;"> 
+      
+      <table border="0" cellspacing="0" cellpadding="0" align="center" class="newsie" valign="middle" style="margin: 18px 0;">
+        <tr>
+          <td style="width:20px" width="20"></td>
+          <td style="background: #fff" width="100" valign="middle">
+            <a href="http://coursesnow.com.au/<%= tracking_code %>"><img src="https://s3-ap-southeast-1.amazonaws.com/coursesnowintranet/newsletter-assets/logo.jpg" alt="Courses Now" border="0" style="width: 293px; height: 53px;" width="293" height="53"></a>
+          </td>
+          <td style="font-size: 11px; font-weight: bold; background: #fff; width: 560px; text-align: right;" valign="middle"><img src="https://s3-ap-southeast-1.amazonaws.com/coursesnowintranet/newsletter-assets/phone_number.jpg" alt="Courses Now" border="0">
+         
+          </td>
+          <td style="width:20px" width="20"></td>
+        </tr>
+      </table>
+      
+      
+      <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/nav' %>
+
+      
+     <br>
+      
+  

@@ -3,7 +3,7 @@ module Tractor
     attr_accessible :anchor_text, :block_key, :body, :main_image, :main_link, :main_title, :newsletter_id, :secondary_title, :sort_order, :status, :remove_main_image
     belongs_to :newsletter
     has_one :template
-    acts_as_list
+    ##TODO Figure WTF ==> acts_as_list
     mount_uploader :main_image, ImageUploader
 
       

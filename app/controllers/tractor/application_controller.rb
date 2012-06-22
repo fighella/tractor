@@ -1,5 +1,14 @@
-module Tractor
-  class ApplicationController < ActionController::Base
-    layout 'tractor_layout'
-  end
+# Customized for engine
+class Tractor::ApplicationController < ApplicationController 
+
+  layout 'tractor_layout'
+  before_filter :authenticate_user!
+
 end
+ 
+
+#module Tractor
+#  class ApplicationController < ActionController::Base
+#    layout 'tractor_layout'
+#  end
+#end

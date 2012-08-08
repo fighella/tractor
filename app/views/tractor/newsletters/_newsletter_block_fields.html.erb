@@ -1,19 +1,18 @@
 <% block = f.object %>
-
 <div class="tab-pane" id="tab<%= block.sort_order + 1 %>">
 
 
   <fieldset>
-    <h3 style="text-transform: uppercase;">Block <%= f.object.sort_order %> <%= f.input  :sort_order, :label => nil, :as => 'hidden' %></h3>  
+    <h3 style="text-transform: uppercase;">Block <%= f.object.sort_order %> <%= f.input :sort_order, :label => nil, :as => 'hidden' %></h3>  
 
     <div class="row">
       <div class="span3">
         <%= f.input :main_title  %>
-        <%= f.input :secondary_title %>
-        <%= f.input :main_link %>
+        <%= f.input :secondary_title, :label => @newsletter.template ? 'Price Info ( | separator)' : 'Secondary Blurb' %>
+        <%= f.input :main_link, :label => block.main_link != nil ? "Link - " + link_to('check (new window)', block.main_link, :target => "_blank", :style => "display: inline") : 'Link URL' %>
         <div class="image"> 
           <% if block.main_image? %>
-            <table>
+            <table id="nb_<%= block.block_key %>_image" >
               <tr>
                 <td>
                   <%= image_tag block.main_image.small_thumb %>
@@ -21,10 +20,11 @@
                 <td style="width: 10px;"> </td>
                 <td>
                   <strong>Section Image</strong><br/>
-                  <%= f.check_box :remove_main_image %> Remove Image
+                  <%= link_to('delete this image', kill_block_image_newsletter_block_path(block.id, :block_number => "1"), :remote => true) %> Remove Image
                 </td>
               </tr>
             </table>
+            <!-- FIND ME!!!! --><%= f.input :main_image, :label => "Upload New Image", :value => '123' %>
           <% else %>
 
             <%= f.input :main_image, :label => "Upload New Image" %>

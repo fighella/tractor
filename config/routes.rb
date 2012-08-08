@@ -5,11 +5,14 @@ Tractor::Engine.routes.draw do
 
   resources :templates
 
-  resources :newsletter_blocks
+  
+  resources :newsletter_blocks do
+     get 'kill_block_image', on: :member
+  end
   
   match "/newsletters/send_test_email/(:id)" => 'newsletters#send_test_email'
   
-  resources :newsletters
+  resources :newsletters 
   
   resources :newsletter_blocks do
     collection { post :sort }

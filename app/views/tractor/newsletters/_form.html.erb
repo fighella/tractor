@@ -74,7 +74,6 @@
 
           </div>
         </div>
-
         <% if templated? %>
           <% ## The nested_forms gem adds in a <div class="fields" around the outside of our tabs... we need it to be gone! so we gsub it out... is that dirty? I think so %>
             <%= (f.fields_for :newsletter_blocks).gsub('<div class="fields">','').gsub(/fieldset>.*\n<\/div>/,'fieldset>').html_safe %>

@@ -58,8 +58,9 @@ module Tractor
     # PUT /newsletter_blocks/1.json
     def update
       @newsletter_block = NewsletterBlock.find(params[:id])
-  
+     
       respond_to do |format|
+        
         if @newsletter_block.update_attributes(params[:newsletter_block])
           format.html { redirect_to @newsletter_block, notice: 'Newsletter block was successfully updated.' }
           format.json { head :no_content }
@@ -81,5 +82,14 @@ module Tractor
         format.json { head :no_content }
       end
     end
+
+    def kill_block_image
+      @block = NewsletterBlock.find(params[:id])
+      @block_number = params[:block_number]
+      respond_to do |format|
+        format.js
+      end
+    end
+
   end
 end

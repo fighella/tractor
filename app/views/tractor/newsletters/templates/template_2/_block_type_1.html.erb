@@ -1,0 +1,29 @@
+<table cellspacing="0" style="margin: 0; padding: 0; width: 640px;" width="640" >
+  <tr>
+    <% if block.main_image.url != nil %>
+      <td width="310" style="width: 310px;">
+        <%= link_to(image_tag(block.main_image.url, :style => "border: 1px solid #999; 308px", :width => "308"), block.main_link ) %>
+      </td>
+      <td style="width: 20px;" width="20"></td>
+      <td width="310" style="width: 310px" valign="top">
+      <% else %>
+        <td valign="top" style="width: 620px">
+        <% end %>
+        <h3 style="line-height: 22px;"><%= block.main_title %></h3>
+        <%= raw (RedCloth.new(block.body).to_html).gsub('<p', '<p style="color: #666; font-size: 14px;"') %>
+
+        <p style="color: #222; font-size: 16px; margin: 8px 0">
+          <% if block.secondary_title.to_s.include? '|' %> 
+            <%= raw price_clean(block.secondary_title) %>
+          <% else %>
+
+        <span style="font-size: 12px; color: #999; text-decoration:line-through">
+          <%= block.secondary_title %>
+        </span>
+          <% end %>
+        </p>
+        <p><%= link_to(image_tag('cta_2.jpg'), block.main_link) %></p>
+      </td>
+    </tr>
+  </table>
+

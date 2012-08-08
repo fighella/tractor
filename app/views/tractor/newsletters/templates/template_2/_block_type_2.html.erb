@@ -1,0 +1,60 @@
+<table cellspacing="0" style="background: #eee; margin: 5px 0 0 0; padding: 0; width: 640px;" >
+  <tr>
+    <td style="width: 310px;" width="310" valign="top">
+      <%= link_to(image_tag(block.main_image.url, :style => "border: 1px solid #ccc; 308px", :width => "308"), block.main_link, ) if block.main_image.url %>
+    </td>
+    <td style="width: 20px"></td>
+    <td style="width: 310px;" width="310" valign="top">
+      <%= link_to(image_tag(block_2.main_image.url, :style => "border: 1px solid #ccc; 308px", :width => "308"), block_2.main_link, ) if block.main_image.url %>
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 310px;" width="310" valign="top">
+      <h3 style="line-height: 24px; margin-bottom: 12px;"><%= block.main_title %></h3></td>
+    <td style="width: 20px"></td>
+    <td style="width: 310px;" width="310" valign="top">
+      <h3 style="line-height: 24px; margin-bottom: 12px;"><%= block_2.main_title %></h3></td>
+  </tr>
+  <tr>
+    <td style="width: 310px;" width="310" valign="top">
+      <%= raw (RedCloth.new(block.body).to_html).gsub('<p', '<p style="color: #666; font-size: 14px; margin: 0 0 12px 0"') %></td>
+    <td style="width: 20px"></td>
+
+    <td style="width: 310px;" width="310" valign="top">
+      <%= raw (RedCloth.new(block_2.body).to_html).gsub('<p', '<p style="color: #666; font-size: 14px; margin: 0 0 12px 0"') %></td>
+  </tr>
+  <tr>
+    <td style="width: 310px;" width="310" valign="top">
+      <p style="color: #222; font-size: 16px; margin: 12px 0 8px 0">
+      <% if block.secondary_title.to_s.include? '|' %> 
+        <%= raw price_clean(block.secondary_title) %>
+      <% else %>
+        <span style="font-size: 12px; color: #999; text-decoration:line-through">
+          <%= block.secondary_title %>
+        </span>
+      <% end %>
+      </p>
+    </td>
+    <td style="width: 20px"></td>
+    <td style="width: 310px;" width="310" valign="top">
+      <p style="color: #222; font-size: 16px; margin: 12px 0 8px 0">
+      <% if block_2.secondary_title.to_s.include? '|' %> 
+        <%= raw price_clean(block_2.secondary_title) %>
+      <% else %>
+        <span style="font-size: 12px; color: #999; text-decoration:line-through">
+          <%= block_2.secondary_title %>
+        </span>
+      <% end %>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 310px;" width="310" valign="top">
+      <%= link_to(image_tag('cta_2.jpg'), block.main_link) %>
+    </td>
+    <td style="width: 20px"></td>
+    <td style="width: 310px;" width="310" valign="top">
+      <%= link_to(image_tag('cta_2.jpg'), block_2.main_link) %>
+    </td>
+  </tr>
+</table>

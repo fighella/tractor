@@ -6,7 +6,7 @@
     <% @newsletters.each do |newsletter| -%>
       <div class="news_tease">
         <h3><%= link_to newsletter.title, newsletter %></h3>
-        <p><%= newsletter.template.title %> </p>
+        <p><%= newsletter.template ? newsletter.template.title : 'no template' %> </p>
       </div>
 
 

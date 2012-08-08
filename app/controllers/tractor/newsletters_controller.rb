@@ -1,8 +1,8 @@
 module Tractor
   class NewslettersController < ApplicationController
-    
+    before_filter :authenticate_user!, :except => [:show]
     include NewslettersHelper
-    
+    require 'Liquid' 
     # GET /newsletters
     # GET /newsletters.json
     def index
@@ -18,7 +18,8 @@ module Tractor
     # GET /newsletters/1.json
     def show
       @newsletter = Newsletter.find(params[:id])
-       
+      @template = Liquid::Template.parse(@newsletter.template.liquid_markup)
+      
       if (params[:send_version] == '0')  
         render :layout => false
         return

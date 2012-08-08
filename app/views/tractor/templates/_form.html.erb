@@ -1,24 +1,40 @@
-<%= form_for(@template) do |f| %>
-  <% if @template.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@template.errors.count, "error") %> prohibited this template from being saved:</h2>
+<div class="row">
 
-      <ul>
-      <% @template.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <%= simple_form_for(@template) do |f| %>
+    <% if @template.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@template.errors.count, "error") %> prohibited this template from being saved:</h2>
+
+        <ul>
+          <% @template.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="span3">
+      <div class="field">
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      </div>
+      <div class="field">
+        <%= f.label :modules %><br />
+        <%= f.number_field :modules %>
+      </div>
+      <div class="field">
+        <%= f.label :is_liquid %><br />
+        <%= f.check_box :is_liquid %>
+      </div>
     </div>
-  <% end %>
+    <div class="span9">
+      <div class="field">
+        <%= f.label :liquid_markup %>
+        <%= f.text_area :liquid_markup, :style => "width:100%" %>
+      </div>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :modules %><br />
-    <%= f.number_field :modules %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

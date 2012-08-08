@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   
   # rails generate simple_form:install && install in app.
   s.add_dependency "simple_form"
-  
+   s.add_dependency "liquid"  
 
   s.add_dependency "nested_form"
   s.add_dependency "acts_as_list"

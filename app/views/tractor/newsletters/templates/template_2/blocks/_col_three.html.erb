@@ -1,9 +1,0 @@
-<h1 style="font: 16px sans-serif; color:#333; margin: 16px 0 18px;font-weight: 500; line-height: 28px;">
-	<%= block_content.main_title %>
-</h1>
-      
-<a href="<%= block_content.main_link %><%= tracking_code %>" border="0"><img src="<%= block_content.main_image.blank? ? '/assets/default_second.jpg' : block_content.main_image.third.url %>" style="border-bottom: 10px solid #fff;"></a>
-      
-<%= raw(RedCloth.new(cleaned_for_news(block_content.body , tracking_code)).to_html) %>
-			
-<br/>

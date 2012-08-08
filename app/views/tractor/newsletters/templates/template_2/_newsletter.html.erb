@@ -1,95 +1,197 @@
-<%  bloch = Array.new %>
+<% template_path = "tractor/newsletters/templates/template_2/" %>
 
-<% @newsletter.newsletter_blocks.order('sort_order ASC').each do |i|    %>
-  <% bloch.push i %>
-<% end %>
+<%= render :partial => template_path + 'html_header' %>
 
+<table class="newsie" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" align="center" style="margin: 0 auto; padding: 0; width:700px; border: none; background: #fff" width="700">
+  <tr>
+    <td style="margin: 0; padding: 0; width: 100%;">
+      <%= render :partial => template_path + 'email_header' %>
 
-
-
-
-    <div class="newsie_background" style="font: sans-serif; line-height: 20px; background: #333333; margin: 0; padding: 10px 0; width: 100%;"
-      align="center"> 
-      <%= render 'tractor/newsletters/templates/template_2/blocks/header', :locals => { :newsletter => @newsletter } %>
-
-      <table class="newsie" cellspacing="0" cellpadding="0"  align="center" bgcolor="#ffffff" border="0" style="width: 100%; padding: 0; margin: 0;background: #fff;font-family: normal sans-serif;" >
-        <tr>
-
-          <td style="width: 20px; margin: 0; padding: 0; "> </td>
-
-          <td width="440" valign="top" style="padding-bottom: 2px;" class="left_col">
-            <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/left_col', :locals => { :block_content => bloch.first } %>
-
-          </td>
-
-          <td style="width: 20px; margin: 0; padding: 0; "> </td>
-
-          <td valign="top" style="" width="200" valign="top">
-            <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/right_col' %>
-          </td>
-
-          <td style="width: 20px; margin: 0; padding: 0; "> </td>
-
-        </tr>
-      </table>
-      
-      <% if bloch[0].main_title != "" %>
-        <table style="margin-top: 2px;  width: 100%;" class="dotted-top featured">
-          <tr>
-            <td style="width: 20px; margin: 0; padding: 0; "> </td>
-
-            <td style="margin: 0; padding: 0;" cellpadding="0"><a href="#"
-                name="feature1"></a>
-
-              <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/col_one', :locals => { :block_content => bloch[1] } %></td>
-
-            <td style="width: 20px; margin: 0; padding: 0; "> </td>
-          </tr>
-        </table> 
-      <% end %> 
-      <% if(bloch[2].main_title != "") %>
-        <table style="margin-top: 2px; width: 100%;" class="dotted-top">
-          <tr>
-            <td style="width: 20px; margin: 0; padding: 0; "> </td>
-
-            <td style=""><a href="#" name="popular"></a>
-              <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/col_two', :locals => { :block_content => bloch[2] } %></td>
-
-            <td style="width: 20px; margin: 0; padding: 0; "> </td>
-          </tr>
-        </table>   
+      <% i = 0 %>
+      <% if @newsletter.newsletter_blocks[i].body == '' %>
+        <%= render :partial => template_path + 'banner', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
+      <% else %>
+        <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
       <% end %>
-      <% unless(bloch[3].main_title == "" && bloch[4].main_title == "") %>         
-        <table style="margin-top: 20px; width: 100%;" class="dotted-top col_three">
-          <tr>
-            <td style="width: 20px; margin: 0; padding: 0; "></td>
+      <br/>
 
-            <td style=""><a href="#" name="price"></a>
-              <table>
+      <table class="newsie" cellspacing="0" cellpadding="0"  align="center" bgcolor="#ffffff" border="0" style="width: 100%; padding: 0; margin: 0; background: #fff" >
+        <tr>
+          <td style="width: 20px; margin: 0; padding: 0;background: #fff">
+          </td>
+          <td valign="top" style="padding-bottom: 2px; background: #fff"> 
+
+            <% if blocks_empty([1,2]) %> 
+              <table style="padding: 10px; background: #eeeeee;">
                 <tr>
-                  <td width="320" style="height: 100px; padding: 0;" valign="top">
-                    <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/col_three', :locals => { :block_content => bloch[3] } %>
-                  </td>
-                  <td width="20"></td>
-                  <td width="320" style="height: 100px; " valign="top">
-
-                    <%= render :partial => 'tractor/newsletters/templates/template_2/blocks/col_three', :locals => { :block_content => bloch[4] } unless bloch[4].nil? %>   
-
+                  <td>
+                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(1), :block_2 => nblock(2) } %>
                   </td>
                 </tr>
               </table>
-              <td style="width: 20px; margin: 0; padding: 0; "> </td>
-            </tr>
-          </table>
+              <br/>
+            <% end %>
 
-        <% end %>   
+            <% if blocks_empty([3,4]) %> 
+              <table style="padding: 10px; background: #eeeeee;">
+                <tr>
+                  <td valign="top">
+
+                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(3), :block_2 => nblock(4) } %>
+                  </td>
+                </tr>
+              </table>
+              <br/>
+            <% end %>
+            <% if blocks_empty([6]) %> 
+              <table cellspacing="10" style="background: #eee;">
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[6] } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+              <br/>
+            <% end %>
+
+
+            <% if blocks_empty([5]) %> 
+              <table cellspacing="10" style="background: #eee;">
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[5] } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+              <br/>
+            <% end %>
+
+
+            <% if blocks_empty([7,8]) %> 
+              <table style="padding: 10px; background: #eeeeee;">
+                <tr>
+                  <td>
+
+                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(7), :block_2 => nblock(8) } %>
+                  </td>
+                </tr>
+              </table>
+              <br/>
+            <% end %>
+
+            <% if blocks_empty([9,10]) %> 
+              <table style="padding: 10px; background: #eeeeee;">
+                <tr>
+                  <td>
+
+                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(9), :block_2 => nblock(10) } %>
+                  </td>
+                </tr>
+              </table>
+              <br/>
+            <% end %>
+
+          </td>
+          <td style="width:20px;" width="20"></td> 
+        </tr> 
+      </table> 
+
+      <%= render :partial => template_path + 'navbar' %>
+
+      <table> 
+        <tr> 
+          <td width="20"></td> 
+          <td  width="300"> 
+            <%= render :partial => template_path + 'why_this_message' %>
+          </td>
+          <td width="40"></td> 
+          <td  width="160" valign="top"> 
+            <br/>        <br/>      <br/> 
+            <%= render :partial => template_path + 'social_links' %>
+
+          </td> 
+
+          <td  width="160" valign="top"> 
+            <br/>      <br/>      <br/> 
+            <table style="font-size: 12px;"> 
+              <tr> 
+                <td valign="top"></td> 
+                <td valign="top"><a href="https://www.cellarmasterwines.com" style="margin: 0 6px; color: #767676; text-decoration: none;">Order Online &raquo;</a></td> 
+              </tr> 
+              <tr> 
+                <td valign="top"></td> 
+                <td valign="top"><a href="https://www.cellarmasterwines.com/about-us" style="margin: 0 6px; color: #767676; text-decoration: none;">About Us &raquo;</a></td> 
+              </tr> 
+              <tr> 
+                <td valign="top"></td> 
+                <td valign="top"><a href="https://www.cellarmasterwines.com/privacy-policy" style="margin: 0 6px; color: #767676; text-decoration: none;">Privacy Policy &raquo;</a></td> 
+              </tr> 
+              <tr> 
+                <td valign="top"></td> 
+                <td valign="top"><a href="https://www.cellarmasterwines.com/terms-and-conditions" style="margin: 0 6px; color: #767676; text-decoration: none;">Terms &amp; Conditions &raquo;</a></td> 
+              </tr> 
+
+            </table> 
+
+
+          </td> 
+          <td width="20"></td> 
+        </tr> 
+      </table>&nbsp;
+
+    </td> 
+  </tr> 
+</table> 
+
+<table style="background: none; border: none; margin: 5px auto 10px auto; padding: 0; color: #bbb; font-size: 10px; font-weight: normal; font-family: sans-serif; line-height: 14px; width: 700px;" align="center" width="700"> 
+  <tr> 
+    <td style="border: none; margin: 0; padding: 0;" width="20"> 
+    </td> 
+    <td style="border: none; color: #bebebe; font-size: 10px; font-weight: normal; font-family: sans-serif; text-align: center" width="650"> 
+
+      <p style="font-size: 11px;" align="center"> This email was sent to [email]. If you are no longer interested you can <unsubscribe style="border: none;text-decoration: none; color: #ccc;"><span style="border: none; color: #fff; text-decoration: none;">unsubscribe instantly</span></unsubscribe>.
+      <br/>© Copyright 2012 CellarMasterWines Wine Club<br/>9/F, Tin Fung Industrial Mansion, 63 Wong Chuk Hang Road, HK</p> 
+
+
+    </td> 
+    <td style="border: none;"  width="20"> </td> 
+  </tr> 
+</table> 
 
 
 
-        <%= render 'tractor/newsletters/templates/template_2/blocks/footer' %>
+<br /> 
 
 
-      </div>
 
-    </body>
-  </html>
+    </div> 
+
+    <style> 
+      .news_reset * { border: 0; margin: 0; padding: 0; font-size: 12px; font-family: sans-serif;}
+      .newsie_background { background: #333333; margin: 0; padding: 10px 0; width: 100%; }
+      .newsie table, .newsie table tr, .newsie table tr td { border: none; padding: 0; margin: 0; font: normal sans-serif; line-height: 20px;}
+      .newsie table.dotted-top { border-top: 1px dotted #808080; }
+      .newsie .featured p, .newsie .col_three p,.newsie .left_col p { font-size: 12px; line-height: 20px; margin-bottom: 12px; color: #080808;  }
+      .newsie table * { font-size: 12px; line-height: 20px; color: #080808;}
+      table.dotted-both {border-top: 1px dotted #808080; border-bottom: 1px dotted #808080;}
+      .newsie table h3 { font-size: 18px; color: #6d1417; line-height: 32px; font-family: Georgia, Times, Helvetica; }
+    </style> 
+  </div> 
+
+
+
+
+
+

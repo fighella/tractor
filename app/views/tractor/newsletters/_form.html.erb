@@ -1,8 +1,9 @@
-<%= simple_nested_form_for(@newsletter, :html => {:class => 'form-vertical' , :multipart => true}) do |f| %>
-  <% if @newsletter.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
 
+<div class="row">
+  <%= simple_nested_form_for(@newsletter, :html => {:class => 'form-vertical' , :multipart => true}) do |f| %>
+  <% if @newsletter.errors.any? %>
+    <div id="error_explanation" class="span12">
+      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
       <ul>
         <% @newsletter.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -10,118 +11,102 @@
       </ul>
     </div>
   <% end %>
+  <div class="span3 side-navbar">
+    <ul class="nav nav-tabs nav-stacked" id="navbar">
+      <li><a href="#tab1">Admin</a></li>
 
-  <style>
-    .admin_subnav li a { color: #42989b; }
-    .admin_subnav li.active a { color: #000;}
-  </style>
+      <% if templated? %>
+        <% @newsletter.newsletter_blocks.order('sort_order ASC').each_with_index do |tab,index| %>
+          <% tab.main_title? ? (link_text = truncate(tab.main_title, :length => 25, :separator => '...')) : (link_text = "Block #{index +1}") -%>
+          <%= content_tag(:li, tab) do %>
+            <%= link_to((content_tag(:i, "", :class => "icon-chevron-right").html_safe + link_text), "#tab#{index + 2}") %>
+          <% end -%>
+        <% end %>
+      <% end %>
 
 
-  <div class="row">
+      <li><a href="#tab_emails">Tests / Send</a></li>
+    </ul>
+  </div>
 
-    <div class="tabbable">
-      <div class="span2 tabs-left">
-        <ul class="nav nav-tabs admin_subnav" style="width: 100%; border-right: 0;">
-          <li class="active"><a href="#tab1" data-toggle="tab">Admin</a></li>
-            <li><a href="#tab<%= @newsletter.newsletter_blocks.count + 2 %>" data-toggle="tab">Tests / Send</a></li>
-          </ul>
-          
-        <ul class="nav nav-tabs admin_subnav" style="width: 100%; border-right: 0;" id="news_blocks" data-update-url="<%= sort_newsletter_blocks_url %>" >
-          
-          <% if templated? %> 
-            <% @newsletter.newsletter_blocks.order('sort_order ASC').each_with_index do |tab,index| %>
+  <div class="span9">
+    <div class="row">
+      <div class="span9">
+        <h2>
+        <% if action_name == 'edit' %>
+          Editing Email
+          <%= @newsletter.title? ? content_tag(:small, @newsletter.title) : '' %>
+        <% else %>
+          Name newsletter & choose a template
+        <% end %>
+      </h2>
+    </div>
+  </div>
 
-                  
-              <% tab.main_title? ? (link_text = truncate(tab.main_title, :length => 25, :separator => '...')) : (link_text = "Block #{index +1}") -%>
-              <%= content_tag(:li, tab) do %>
-                <%= link_to(link_text, "#tab#{index + 2}", :data => { :toggle => "tab" }) %>
-              <% end -%>
-              
-              
-                  
-            <% end %>
-
-          <% end %>
-        </ul>
+    <div class="row" id="tab1">
+           <div class="span3">
+        <%= f.input :title, :label => 'Campaign Name' %>
+        <%= f.input :subject_line if templated? %>
+        <%= f.input :preheader if templated? %> 
       </div>
-
-      <div class="tab-content span10">
-        <div class="tab-pane active" id="tab1">
-          <div class="row">
-            <div class="span3">
-              <%= f.input :title, :label => 'Campaign Name' %>
-              <%= f.input :subject_line if templated? %>
-              <%= f.input :preheader if templated? %> 
-            </div>
-            <div class="span3">
-              <% if templated? %>
-                <%= f.association :template, :label => "Template (locked)"  %>
-              <% else %>
-                <%= f.association :template  %>
-              <% end %>
-              <%= f.input :tracking_code, :label => 'Custom tracking code' if templated? %>
-              <%= f.input :sections, :as => 'hidden' %>
-
-            </div>
-
-            <div class="span3">
-
-
-              <%= f.input :status, :collection => content_statuses, :default => 1 %> 
-
-              <%= f.input :content, :input_html => { :style => "width: 100%; height: 100px;"}, :label => 'Notes' %>
-            </div>
-
-          </div>
-        </div>
+      <div class="span3">
         <% if templated? %>
-          <% ## The nested_forms gem adds in a <div class="fields" around the outside of our tabs... we need it to be gone! so we gsub it out... is that dirty? I think so %>
-            <%= (f.fields_for :newsletter_blocks).gsub('<div class="fields">','').gsub(/fieldset>.*\n<\/div>/,'fieldset>').html_safe %>
-
-
-              <div class="tab-pane" id="tab<%= @newsletter.newsletter_blocks.count + 2 %>">
-                <h3>Email Tests</h3>
-
-                <% ## Old test email send format link_to 'Send Test Email', newsletters_send_test_email_path + "/#{(@newsletter.id)}", :remote => true, :class=>'send_test_button btn btn-large' %>
-                <% if @newsletter.newsletter_test_emails.any?  %>
-                  <h4>Tests sent</h4>
-                  <p style="color: #999;">
-                    <% @newsletter.newsletter_test_emails.order('created_at DESC').each do |test| -%>
-                      To: <%= test.send_to %> // Sent <%= time_ago_in_words(test.created_at) %> ago<br/>
-                    <% end %> 
-                  <% else %>
-                    
-                    None sent.
-                  <% end -%>
-                </p>
-              </div>
-            <% end %>
-          </div>
-        </div>
+          <%= f.association :template, :label => "Template (locked)"  %>
+        <% else %>
+          <%= f.association :template  %>
+        <% end %>
+        <%= f.input :tracking_code, :label => 'Custom tracking code' if templated? %>
+        <%= f.input :sections, :as => 'hidden' %>
       </div>
 
-
+      <div class="span3">
+        <%= f.input :status, :collection => content_statuses, :default => 1 %> 
+        <%= f.input :content, :input_html => { :style => "width: 100%; height: 100px;"}, :label => 'Notes' %>
+      </div>
     </div>
 
 
+      <% if templated? %>
 
+        <% ## The nested_forms gem adds in a <div class="fields" around the outside of our tabs... we need it to be gone! so we gsub it out... is that dirty? I think so %>
+          <%= (f.fields_for :newsletter_blocks).gsub('<div class="fields">','').gsub(/fieldset>.*\n<\/div>/,'fieldset>').html_safe %>
 
+            <div class="row" id="tab_emails">
+              <h3>Email Tests</h3>
 
-    <div class="row">
-      <div class="span2">
-        &nbsp;  
+              <% ## Old test email send format link_to 'Send Test Email', newsletters_send_test_email_path + "/#{(@newsletter.id)}", :remote => true, :class=>'send_test_button btn btn-large' %>
+              <% if @newsletter.newsletter_test_emails.any?  %>
+                <h4>Tests sent</h4>
+                <p style="color: #999;">
+                <% @newsletter.newsletter_test_emails.order('created_at DESC').each do |test| -%>
+                  To: <%= test.send_to %> // Sent <%= time_ago_in_words(test.created_at) %> ago<br/>
+                <% end %> 
+              <% else %>
+                None sent.
+              <% end -%>
+              </p>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div class="span10">
-        <div class="form-actions">
-          <%= link_to 'Send Test Email', '#myModal', :class => 'btn btn-success', :data => { :toggle => "modal" } unless @newsletter.id.nil? %>
+      <div class="row">
+        <div class="span12">
+          <div class="form-actions">
+            <%= link_to 'Send Test Email', '#myModal', :class => 'btn btn-success', :data => { :toggle => "modal" } unless @newsletter.id.nil? %>
+            <%= f.button :submit, :class => "btn btn-info offset5" %>
+            <%= link_to 'Cancel', :back, :confirm => 'Are you sure?', :class => 'btn' %>
+          </div>            
+        </div> 
+      </div>
+    <% end %>
 
-          <%= f.button :submit, :class => "btn btn-info offset5" %>
-          <%= link_to 'Cancel', :back, :confirm => 'Are you sure?', :class => 'btn' %>
+    <% render 'test_send_modal' unless @newsletter.id.nil? -%>  
 
 
-        </div>            
-    </div> 
-  </div>
-  <% end %>
+    <style>
+      li { position: relative;}
+      li i { position: absolute; right: 4px; top: center; bottom: center; padding-top: 3px; color: #ccc}
+      .admin_subnav li a { color: #42989b; }
+      .admin_subnav li.active a { color: #000;}
+    </style>
 
-<% render 'test_send_modal' unless @newsletter.id.nil? -%>  

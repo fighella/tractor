@@ -1,20 +1,20 @@
 <%= content_for(:content) do %>
 
-  <%= render 'tractor_primary_nav' %> 
-    <div class="container">
       <%= yield %>
-    </div>
-    <br/>
 
 <% end %>
 
 <%= render :file => 'layouts/web_app' %>
 <script>
-  $('a#tab1').click(function (e) {
-    e.preventDefault();
-    $(this).tab('show');
-  });
+   $('#navbar').scrollspy(); 
+  $('#navbar').affix({
+      offset: {
+        top: 80,
+        bottom: 270
+      }
+    });
 
+  
   $('.send_test_button').ajaxSuccess( function() {  
     $(this).append(' - Email Sent!', function() {
       // Animation complete.

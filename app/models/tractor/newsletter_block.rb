@@ -1,8 +1,11 @@
 module Tractor
   class NewsletterBlock < ActiveRecord::Base
-    attr_accessible :anchor_text, :block_key, :body, :main_image, :main_link, :main_title, :newsletter_id, :secondary_title, :sort_order, :status, :remove_main_image, :block_type
+    attr_accessible :anchor_text, :block_key, :body, :main_image, :main_link, :main_title, :newsletter_id, :secondary_title, :sort_order, :status, :remove_main_image, :block_type, :remote_main_image_url, :other_block
     belongs_to :newsletter
     has_one :template
+
+    scope :has_title, where("main_title != ?","")
+
     ##TODO Figure WTF ==> acts_as_list
     mount_uploader :main_image, ImageUploader
     liquid_methods :main_title, :newsletter, :body, :secondary_title, :block_type, :block_key, :main_link, :main_image_path_helper, :anchor_text, :main_image

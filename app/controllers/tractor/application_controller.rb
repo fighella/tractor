@@ -4,7 +4,7 @@ class Tractor::ApplicationController < ApplicationController
   layout 'tractor_layout'
   before_filter :authenticate_user!
 
-  include ApplicationHelper
+  include Tractor::ApplicationHelper
 
 end
  

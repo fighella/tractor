@@ -1,5 +1,5 @@
 module Tractor
-  class DashboardController < ApplicationController
+  class DashboardController < Tractor::ApplicationController
     def index
     
     @newsletters = Newsletter.all

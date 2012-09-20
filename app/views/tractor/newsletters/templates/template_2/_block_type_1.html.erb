@@ -1,3 +1,4 @@
+
 <table cellspacing="0" style="margin: 0; padding: 0; width: 640px;" width="640" >
   <tr>
     <% if block.main_image.url != nil %>
@@ -9,9 +10,10 @@
       <% else %>
         <td valign="top" style="width: 620px">
         <% end %>
-        <h3 style="line-height: 22px;"><%= block.main_title %></h3>
+<%= link_to(content_tag(:h3, block.main_title.to_s.html_safe, :style => "line-height: 22px; margin-bottom: 12px;"), block.main_link, :style => "text-decoration: none;") %>
+<% if block.body  %>
         <%= raw (RedCloth.new(block.body).to_html).gsub('<p', '<p style="color: #666; font-size: 14px;"') %>
-
+      <% end %>
         <p style="color: #222; font-size: 16px; margin: 8px 0">
           <% if block.secondary_title.to_s.include? '|' %> 
             <%= raw price_clean(block.secondary_title) %>

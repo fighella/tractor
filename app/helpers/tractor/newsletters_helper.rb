@@ -4,7 +4,12 @@ module Tractor
 
     def price_clean(text)
       clean_price = text.split('|')
-      clean_price = "<span style=\"font-size: 14px; color: #666; text-decoration:__line-through\">#{clean_price[0]}</span><br/><span style=\"color: red; font-size: 16px; font-weight: bold;\">#{clean_price[1]}</span>"
+      if clean_price[2]
+      clean_price = "<span style=\"font-size: 14px; color: #333; text-decoration:__line-through\">#{clean_price[0]}</span><br/><span style=\"color: #d12433; font-size: 16px; line-height: 24px; font-weight: bold;\">Discount #{clean_price[2]}</span><br/><span style=\"font-size: 14px; color: #333; \">#{clean_price[1]}</span>"
+      else
+      clean_price = "<span style=\"font-size: 14px; color: #333;\">#{clean_price[0]}</span><br/><span style=\"color: #de1825; font-size: 16px; font-weight: bold;\">#{clean_price[1]}</span>"
+
+      end
     end
 
     def templated?

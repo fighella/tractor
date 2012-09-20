@@ -1,5 +1,5 @@
 module Tractor
-  module ApplicationHelper
+  module Tractor::ApplicationHelper
 
     def content_statuses
       ['Online','Offline','On Hold']

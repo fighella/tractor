@@ -1,3 +1,0 @@
-[submodule "lib/gems/tractor-gem"]
-	path = lib/gems/tractor-gem
-	url = https://git@heroku.com:tractor-gem.git

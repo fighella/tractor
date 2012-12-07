@@ -8,8 +8,9 @@ GIT
       railties (>= 3.1)
       therubyracer (>= 0.10.2)
 
-PATH
-  remote: lib/gems/tractor-gem
+GIT
+  remote: git@heroku.com:tractor-gem.git
+  revision: 4f6b88f3c3d52b02ad8e8c281c854ce25fd95a33
   specs:
     tractor (0.0.2)
       acts_as_list
@@ -50,7 +51,7 @@ GEM
     activesupport (3.2.7)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    acts_as_list (0.1.8)
+    acts_as_list (0.1.9)
     addressable (2.3.2)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)

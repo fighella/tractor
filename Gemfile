@@ -82,3 +82,4 @@ gem 'liquid'
 
 gem 'tractor', '0.0.2', :path => 'vendor/tractor'
 gem 'rb-fsevent', '~> 0.9.1'
+gem 'taps'

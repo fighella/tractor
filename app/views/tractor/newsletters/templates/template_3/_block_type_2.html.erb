@@ -33,8 +33,6 @@
       <p style="color: #222; font-size: 16px; margin: 12px 0 8px 0">
       <% if block.secondary_title.to_s.include? '|' %> 
         <%= raw price_clean(block.secondary_title) %>
-      <% elsif block.secondary_title.to_s.include? 'RRP' %> 
-        <%= raw rprice_clean(block.secondary_title) %>
       <% else %>
         <span style="font-size: 12px; color: #999; text-decoration:line-through">
           <%= block.secondary_title %>
@@ -47,8 +45,8 @@
       <p style="color: #222; font-size: 16px; margin: 12px 0 8px 0">
       <% if block_2.secondary_title.to_s.include? '|' %> 
         <%= raw price_clean(block_2.secondary_title) %>
-      <% elsif block_2.secondary_title.to_s.include? 'RRP' %> 
-        <%= raw rprice_clean(block_2.secondary_title) %>
+      <% elsif block_2.secondary_title.to_s.include? 'RRP'  %>
+        <%= raw r_price_clean(block_2.secondary_title) %>
       <% else %>
         <span style="font-size: 12px; color: #999; text-decoration:line-through">
           <%= block_2.secondary_title %>

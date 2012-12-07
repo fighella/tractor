@@ -36,6 +36,7 @@ module Tractor
     # GET /newsletter_blocks/1/edit
     def edit
       @newsletter_block = NewsletterBlock.find(params[:id])
+      @newsletter = @newsletter_block.newsletter
     end
   
     # POST /newsletter_blocks
@@ -62,7 +63,7 @@ module Tractor
       respond_to do |format|
         
         if @newsletter_block.update_attributes(params[:newsletter_block])
-          format.html { redirect_to @newsletter_block, notice: 'Newsletter block was successfully updated.' }
+          format.html { redirect_to tractor.newsletter_path(@newsletter_block.newsletter), notice: 'Newsletter block was successfully updated.' }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }

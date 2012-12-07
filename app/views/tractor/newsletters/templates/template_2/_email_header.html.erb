@@ -4,10 +4,14 @@
               <tr> 
                 <td style="width:20px" width="20"></td> 
                 <td style="background: #fff" valign="middle"> 
-                  <%= link_to(image_tag("cmwlogo.jpg", :alt => "Cellar Master Wine", :style => "border: 0; width: 442px; height: 62px;"), "http://cellarmasterwines.com")  %> 
-                </td> 
-                <td style="background: #fff" valign="middle"> 
-                  <%= link_to((image_tag("cmw_offer.jpg", :alt => "Cellar Master Wines")), "https://www.cellarmasterwines.com/discount/BROKENWOOD%20INDIGO%20PINOT%20OFFER") %>
+                  <%= link_to(image_tag("cmwlogo_full.jpg", :alt => "Cellar Master Wine", :style => "border: 0; width: 660px;"), "http://cellarmasterwines.com")  %> 
+                  <% if @newsletter.content.include?("jpg")  %>
+                    <% link_to((image_tag(@newsletter.content, :alt => "Cellar Master Wines")), "https://www.cellarmasterwines.com/") %>
+                  <% else %>
+                    <% link_to((image_tag("cmw_offer_1.jpg", :alt => "Cellar Master Wines")), "http://cellarmasterwines.com/discount/Pommery%20Special%20BONUS%20OFFER%21") %>
+                  <% end %>
+
+
                 </td> 
                 <td style="width:20px" width="20"></td> 
               </tr> 

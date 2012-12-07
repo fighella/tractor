@@ -7,194 +7,82 @@
     <td style="margin: 0; padding: 0; width: 100%;">
       <%= render :partial => template_path + 'email_header' %>
 
-      <% i = 0 %>
-      <% if @newsletter.newsletter_blocks[i].body == '' %>
-      <% if @newsletter.newsletter_blocks[i].main_title != '' %>  
-        <table cellspacing="0" style="text-align: center; margin-bottom: 8px;" >
-              <tr>
-                <td width="20"></td>
-                <td bgcolor="#333" style="width: 660px; text-align: center" width="660">
-                  <% if @newsletter.title %>
-                    <table style="margin: 8px auto; text-align: center;" align="center"><tr><td style="text-align: center">
-
-                          <%= content_tag(:h1, raw(@newsletter.newsletter_blocks[i].main_title), :style => "color: #e5e5e5; font-size: 28px;  font-family: Gil Sans, Helvetica, Arial, Sans-serif; line-height: 28px") %>
-
-                    </td></tr></table>
-                  <% end %>
-                </td>
-                <td width="20"></td>
-              </tr>
-            </table>
-          <% end %>
-        <%= render :partial => template_path + 'banner', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
-      <% else %>
-        <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
-      <% end %>
-      <br/>
-
-      <% i = 15 %>
-      <% if @newsletter.newsletter_blocks[i] == nil  %>
-      <% if @newsletter.newsletter_blocks[i].body == '' %>
-        <% if @newsletter.newsletter_blocks[i].main_title != '' %>  
-        <table cellspacing="0" style="text-align: center; margin-bottom: 8px;" >
-              <tr>
-                <td width="20"></td>
-                <td bgcolor="#333" style="width: 660px; text-align: center" width="660">
-                  <% if @newsletter.title %>
-                    <table style="margin: 8px auto; text-align: center;" align="center"><tr><td style="text-align: center">
-
-                          <%= content_tag(:h1, raw(@newsletter.newsletter_blocks[i].main_title), :style => "color: #e5e5e5; font-size: 28px;  font-family: Gil Sans, Helvetica, Arial, Sans-serif; line-height: 28px") %>
-
-                    </td></tr></table>
-                  <% end %>
-                </td>
-                <td width="20"></td>
-              </tr>
-            </table>
-          <% end %>
-
-        <%= render :partial => template_path + 'banner', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
-      <% else %>
-        <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[i] } %>
-      <% end %>
-      <br/>
-    <% end %>
-
-
       <table class="newsie" cellspacing="0" cellpadding="0"  align="center" bgcolor="#ffffff" border="0" style="width: 100%; padding: 0; margin: 0; background: #fff" >
         <tr>
           <td style="width: 20px; margin: 0; padding: 0;background: #fff">
           </td>
           <td valign="top" style="padding-bottom: 2px; background: #fff"> 
 
-            <% if blocks_empty([1,2]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(1), :block_2 => nblock(2) } %>
-                  </td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
+            <% @newsletter.newsletter_blocks.each_with_index do |block, index| %>
+              <% if block.just_image %>
+                <%= render :partial => template_path + 'banner', :locals => { :block => block } %>
+              <% end %>
+              <% if block.just_headline  %>
+                <table cellspacing="0" style="text-align: center; margin-bottom: 8px;" >
+                  <tr>
+                    <td bgcolor="#333" style="width: 660px; text-align: center; position: relative;" width="660">
+                      <table style="margin: 8px auto; text-align: center;" align="center"><tr><td style="text-align: center; ">
 
-            <% if blocks_empty([3,4]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td valign="top">
+                            <%= link_to("edit", edit_newsletter_block_path(block),:class => "btn", :style => "position: absolute; top: 0; left: 0; padding: 10px;" ) if current_user && params[:send_version] != "0" %>
 
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(3), :block_2 => nblock(4) } %>
-                  </td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
-         <!--   <% if blocks_empty([6]) %> 
-              <table cellspacing="10" style="background: #eee;">
-                <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>
-                    <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[6] } %>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
+                            <%= content_tag(:h1, raw(block.main_title), :style => "color: #e5e5e5; font-size: 28px;  font-family: Gil Sans, Helvetica, Arial, Sans-serif; line-height: 28px") %>
 
+                      </td></tr></table>
+                    </td>
+                  </tr>
+                </table>
 
-            <% if blocks_empty([5]) %> 
-              <table cellspacing="10" style="background: #eee;">
-                <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>
-                    <%= render :partial => template_path + 'block_type_1', :locals => { :block => @newsletter.newsletter_blocks[5] } %>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                </tr>
-              </table>
-              <br/>
-            <% end %> -->
+              <% end %>
 
-    <% if blocks_empty([5,6]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(5), :block_2 => nblock(6) } %>
-                  </td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
-<!--
-<table style="margin: 8px auto; text-align: center; width: 100%;" align="center" bgcolor="#ce232d"><tr bgcolor="#ce232d"><td style="text-align: center; background: #ce232d; width: 100%; padding: 8px 0;" bgcolor="#ce232d">
-                          <%= content_tag(:h1, "Huge Saving on Penfolds", :style => "color: #ffffff; font-size: 28px;  font-family: Gil Sans, Helvetica, Arial, Sans-serif; line-height: 28px") %>
-
-                    </td></tr></table> -->
-
-            <% if blocks_empty([7,8]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(7), :block_2 => nblock(8) } %>
-                  </td>
-                </tr>
-              </table>
-            <% end %>
+              <% 
+                  ## If we're dealing with a full block type do this:
+                if block.full_block
+                  if !@newsletter.newsletter_blocks[index - 1].full_block
+                    ## if the block before this block is not a "full block then we can assume this is First.
+                    is_first = true
+                  else
+                    # otherwise we need to figure out if it's an even one or an odd one...
+                    (2..20).each do |less|
+                      break if !@newsletter.newsletter_blocks[index - less].full_block
+                      if @newsletter.newsletter_blocks[index - less].full_block
+                        is_first = true
+                        if(less % 2 > 0)
+                          is_first = false
+                        end
+                      end
+                    end
+                  end
+                  %>
 
 
-         <!--  <table style="margin: 8px auto; text-align: center; width: 100%;" align="center" bgcolor="#ce232d"><tr bgcolor="#ce232d"><td style="text-align: center; background: #ce232d; width: 100%; padding: 8px 0;" bgcolor="#ce232d">
-                          <%= content_tag(:h1, "Priced to Clear", :style => "color: #ffffff; font-size: 28px;  font-family: Gil Sans, Helvetica, Arial, Sans-serif; line-height: 28px") %>
+                <% if is_first == true  %>
 
-                    </td></tr></table> -->
+                  <table style="padding: 10px; background: #eeeeee;">
+                    <tr>
+                      <td>
+                        <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(index), :block_2 => nblock(index + 1) } %>
+                      </td>
+                    </tr>
+                  </table>
+                  <br/>
+                <% end %>
+              <% end %>
+
+            <% if block.text_only  %>
+
+<table style="background: #fff;">
+                    <tr>
+                      <td style="position: relative;">
+                        <%= link_to("edit", edit_newsletter_block_path(block),:class => "btn", :style => "position: absolute; top: 0; right: 0; padding: 10px;" ) if current_user && params[:send_version] != "0" %>
+                        <h1 style="font-size: 20px; line-height: 26px; margin: 10px 0; color: #b8151a;"><%= block.main_title  %></h2>
+                        <%= raw (RedCloth.new(block.body).to_html).gsub('<p', '<p style="color: #333; font-size: 14px; margin: 0 0 12px 0"').gsub('<h2','<h2 style="color: #333; font-size: 18px; margin: 18px 0 12px 0;"') if block.body %>
+                      </td>
+                    </tr>
+                  </table>
 
 
-            <% if blocks_empty([9,10]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(9), :block_2 => nblock(10) } %>
-                  </td>
-                </tr>
-              </table>
-            <% end %>
-
-<br/> 
-            <% if blocks_empty([11,12]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(11), :block_2 => nblock(12) } %>
-                  </td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
-
-            <% if blocks_empty([13,14]) %> 
-              <table style="padding: 10px; background: #eeeeee;">
-                <tr>
-                  <td>
-
-                    <%= render :partial => template_path + "block_type_2", :locals => { :block => nblock(13), :block_2 => nblock(14) } %>
-                  </td>
-                </tr>
-              </table>
-              <br/>
-            <% end %>
-
+                <% end %>
+              <% end %>
           </td>
           <td style="width:20px;" width="20"></td> 
         </tr> 
@@ -252,8 +140,8 @@
     <td style="border: none; margin: 0; padding: 0;" width="20"> 
     </td> 
     <td style="border: none; color: #bebebe; font-size: 10px; font-weight: normal; font-family: sans-serif; text-align: center" width="650"> 
-
-      <p style="font-size: 11px;" align="center">* Free Wine Offer applies when you buy 12 bottles of these <a href="https://www.cellarmasterwines.com/discount/BROKENWOOD%20INDIGO%20PINOT%20OFFER" style="color: #fff; font-size: 11px; border: none; text-decoration: none;">select wines</a>. To find out more <a href="https://www.cellarmasterwines.com/discount/BROKENWOOD%20INDIGO%20PINOT%20OFFER" style="border: none; color: #fff; text-decoration: none; font-size: 11px;">click here</a>. <br/> This email was sent to [email]. If you are no longer interested you can <unsubscribe style="border: none;text-decoration: none; color: #ccc;"><span style="border: none; color: #fff; text-decoration: none;">unsubscribe instantly</span></unsubscribe>.
+      <% unless @newsletter.content.include?("jpg")  %>
+        <p style="font-size: 11px;" align="center"><% end %> <br/> This email was sent to [email]. If you are no longer interested you can <unsubscribe style="border: none;text-decoration: none; color: #ccc;"><span style="border: none; color: #fff; text-decoration: none;">unsubscribe instantly</span></unsubscribe>.
       <br/>© Copyright 2012 CellarMasterWines Wine Club<br/>9/F, Tin Fung Industrial Mansion, 63 Wong Chuk Hang Road, HK</p> 
 
 
@@ -279,11 +167,6 @@
       .newsie table * { font-size: 12px; line-height: 20px; color: #080808;}
       table.dotted-both {border-top: 1px dotted #808080; border-bottom: 1px dotted #808080;}
       .newsie table h3 { font-size: 18px; color: #6d1417; line-height: 32px; font-family: Georgia, Times, Helvetica; }
+      .newsie p strong, .newsie p a { font-size: 14px;}
     </style> 
   </div> 
-
-
-
-
-
-

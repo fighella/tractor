@@ -2,12 +2,12 @@
 
 <div class="row" id="tab<%= block.sort_order + 1 %>">
   <div class="span6">
-  <fieldset>
+  <fieldset><D-r>
     <h3 style="text-transform: uppercase;">Block <%= f.object.sort_order %> <%= f.input :sort_order, :label => nil, :as => 'hidden' %></h3>  
 
         <%= f.input :main_title, :input_html => { :class => "span6"} %>
         <%= f.input :secondary_title, :label => @newsletter.template ? 'Price Info ( | separator)' : 'Secondary Blurb',:input_html => { :class => "span6"} %>
-        <%= f.input :main_link, :label => block.main_link != nil ? "Link - " + link_to('check (new window)', block.main_link, :target => "_blank", :style => "display: inline") : 'Link URL',:input_html => { :class => "span6"} %>
+        <%= f.input :main_link, :label => block.main_link != nil ? "Link - " + link_to('check (new window)', "#{block.main_link}?stop_cache=#{(0...8).map{65.+(rand(26)).chr}.join.to_s}", :target => "_blank", :style => "display: inline") : 'Link URL',:input_html => { :class => "span6"} %>
         <%= f.input :body, :input_html => { :style =>  "width: 100%; height: 200px;" } %>
         <div class="image"> 
           <% if block.main_image? %>
@@ -39,7 +39,7 @@
         <%= f.input :block_key, :as => 'hidden' %>
         <%= f.input  :newsletter_id, :as => 'hidden' %>
         <%= f.input :status, :collection => content_statuses, :default => 1 %> 
-        <%= f.input :anchor_text %>
+        <%= f.input :anchor_text, :label => "Is second?" %>
 
               </div>
             </fieldset>

@@ -1,4 +1,4 @@
-<%= form_for(@newsletter_block) do |f| %>
+<%= simple_form_for(@newsletter_block) do |f| %>
   <% if @newsletter_block.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@newsletter_block.errors.count, "error") %> prohibited this newsletter_block from being saved:</h2>
@@ -10,47 +10,52 @@
       </ul>
     </div>
   <% end %>
+<% block = f.object %>
 
-  <div class="field">
-    <%= f.label :block_key %><br />
-    <%= f.text_field :block_key %>
-  </div>
-  <div class="field">
-    <%= f.label :newsletter_id %><br />
-    <%= f.number_field :newsletter_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sort_order %><br />
-    <%= f.number_field :sort_order %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.number_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :main_title %><br />
-    <%= f.text_field :main_title %>
-  </div>
-  <div class="field">
-    <%= f.label :secondary_title %><br />
-    <%= f.text_field :secondary_title %>
-  </div>
-  <div class="field">
-    <%= f.label :main_link %><br />
-    <%= f.text_field :main_link %>
-  </div>
-  <div class="field">
-    <%= f.label :anchor_text %><br />
-    <%= f.text_field :anchor_text %>
-  </div>
-  <div class="field">
-    <%= f.label :main_image %><br />
-    <%= f.text_field :main_image %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
+<div class="row" id="tab<%= block.sort_order + 1 %>">
+  <div class="span6">
+  <fieldset>
+    <h3 style="text-transform: uppercase;">Block <%= f.object.sort_order %> <%= f.input :sort_order, :label => nil, :as => 'hidden' %></h3>  
+
+        <%= f.input :main_title, :input_html => { :class => "span6"} %>
+        <%= f.input :secondary_title, :label => @newsletter.template ? 'Price Info ( | separator)' : 'Secondary Blurb',:input_html => { :class => "span6"} %>
+        <%= f.input :main_link, :label => block.main_link != nil ? "Link - " + link_to('check (new window)', block.main_link, :target => "_blank", :style => "display: inline") : 'Link URL',:input_html => { :class => "span6"} %>
+        <%= f.input :body, :input_html => { :style =>  "width: 100%; height: 200px;" } %>
+        <div class="image"> 
+          <% if block.main_image? %>
+            <table id="nb_<%= block.block_key %>_image" >
+              <tr>
+                <td>
+                  <%= image_tag block.main_image.small_thumb %>
+                </td>
+                <td style="width: 10px;"> </td>
+                <td>
+                  <strong>Section Image</strong><br/>
+                  <%= link_to('delete this image', kill_block_image_newsletter_block_path(block.id, :block_number => "1"), :remote => true) %> Remove Image
+                </td>
+              </tr>
+            </table>
+            <!-- FIND ME!!!! --><%= f.input :main_image, :label => "Upload New Image", :value => '123' %>
+          <% else %>
+
+            <%= f.input :main_image, :label => "Upload New Image" %>
+            <%= f.input :remote_main_image_url  %>
+          <% end %>          
+        </div>
+
+
+      </div>
+      <div class="span3">
+        
+        <%= f.input :sort_order %>
+        <%= f.input :block_key, :as => 'hidden' %>
+        <%= f.input  :newsletter_id, :as => 'hidden' %>
+        <%= f.input :status, :collection => content_statuses, :default => 1 %> 
+        <%= f.input :anchor_text, :label => "Is second?" %>
+
+              </div>
+            </fieldset>
+        
   <div class="actions">
     <%= f.submit %>
   </div>

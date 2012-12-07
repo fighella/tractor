@@ -1,0 +1,139 @@
+<% template_path = "tractor/newsletters/templates/template_3/" %>
+<% def nb(i)
+@newsletter.newsletter_blocks[i]
+end
+%>
+<%= render :partial => template_path + 'html_header' %>
+<%= render :partial => template_path + 'email_header'  %>
+
+
+<table bgcolor="#ffffff" border="0" cellpadding="5" cellspacing="0" style="margin-top: 10px; margin-right: 0px; margin-bottom: 10px; margin-left: 0px; background: #ffffff; border: 5px solid #4d98b8;">
+  <tbody>
+    <tr>
+      <td>
+
+        <table border="0">
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to(image_tag(nb(0).main_image, :width => 750, :height => 220), @newsletter.newsletter_blocks[0].main_link) %>
+
+
+                <table border="0" cellpadding="0" cellspacing="0" style="margin: 0; padding: 0">
+                  <tbody>
+                    <tr>
+                      <td style="width: 470px;" valign="top">
+                        <h1 style="color:#006B99;font-size:18px; font-family: arial,verdana;line-height: 26px;">
+                          <%= @newsletter.newsletter_blocks[1].main_title  %>
+                        </h1>
+                        <p style="font-family: arial,verdana; font-size:12px;padding:0;margin:0 0 8px 0; color:#023B56;">
+                        <%= RedCloth.new(@newsletter.newsletter_blocks[1].body)  %>
+
+                        </p>
+                        <table border="0" style="width: 100%; text-align: left;">
+                          <tbody>
+                            <tr>
+                              <td style="text-align: right;"><a href="<%= @newsletter.newsletter_blocks[1].main_link %>"><img height="26" src="http://l.yimg.com/ao/i/travel/tt/newsletters/imgs/find-out-more-btn.gif" style="border:none; margin: 0px 0 0 0px;" /></a></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td style="width: 10px;"></td>
+                      <td style="background: #def; width: 270px;" valign="top">
+
+                        <table border="0" cellpadding="20" cellspacing="0">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <h2 style="color:#006B99;font-size:14px; font-family: arial,verdana;line-height: 20px;">CRUISE DEALS</h2>
+                                <% deals = nb(2).body.split(/\r\n/).map { |x| x.split('| ')} %>
+                                <% deals.each do |deal|  %>
+                                  <span style="color: #FF6634;font-size: 11px; font-weight: bold; "> &gt; </span><a href="<%= deal[1]  %>" style="color: #006a98; text-decoration: none; font-size: 12px; margin-left: 5px; "><%= deal[0].gsub(">", "") %></a><br />
+                                <% end  %>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td>
+
+                <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 10px;" width="750">
+                  <tbody>
+                    <tr>
+                      <td style="width: 360px;" valign="top" width="360">
+
+                        <%= render :partial => "tractor/newsletters/templates/template_#{@newsletter.template_id}/small_block", :locals => { :block => nb(3) } %>
+                      </td>
+                      <td style="width: 10px;" width="10"></td>
+                      <td valign="top">
+                        <%= render :partial => "tractor/newsletters/templates/template_#{@newsletter.template_id}/small_block", :locals => { :block => nb(4) } %>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br />  
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table border="0">
+          <tbody>
+            <tr>
+              <td>
+                <a href="http://www.cruiseguru.com.au/"><img height="100" src="http://l.yimg.com/ao/i/travel/tt/newsletters/may12/cruises/cruise_heading.jpg" width="750" /></a>                  
+                <% @newsletter.newsletter_blocks.each_with_index do |nb, i| %>
+                  <% if i >= 5 %>
+                    
+                    <%= render :partial => "tractor/newsletters/templates/template_#{@newsletter.template_id}/big_cruise", :locals => { :block => nb(i) } if nb(i).main_title != '' %> 
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table bgcolor="#006B99" border="0" cellpadding="0" cellspacing="0" style="background: #006B99" width="100%">
+  <tbody>
+    <tr>
+      <td align="center" style="font-family: arial,verdana;font-size:12px;color:#ffffff;padding:10px;">
+        <a href="http://www.facebook.com/pages/Byron-Bay-Australia/TotalTravel/110041243850?ref=ts" target="_blank"><img align="top" border="0" height="40" src="http://l.yimg.com/ao/i/travel/tt/newsletters/december10/facebook.jpg" width="558" /></a><br />
+        <br />
+        Copyright 2012 Yahoo7. All rights reserved.<br />
+        Reproduction in whole or in part without permission is prohibited.
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="font-family: arial,verdana;font-size:12px;color:#ffffff;padding:10px;">
+        <a href="http://au.totaltravel.yahoo.com/?src=email" style="margin:0 5px;color:#ffffff;">Totaltravel from Yahoo!7</a> Suite 1, 17 Lawson St Byron Bay NSW 2481 AUSTRALIA</td>
+    </tr>
+    <tr>
+      <td align="center" style="font-family: arial,verdana;font-size:12px;color:#ffffff;padding-bottom:10px;">
+        <a href="http://au.docs.yahoo.com/info/terms/" style="margin:0 5px;color:#ffffff;">Terms of service</a>|<a href="http://info.yahoo.com/privacy/au/yahoo/" style="margin:0 5px;color:#ffffff;">Privacy Policy</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

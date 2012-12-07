@@ -1,6 +1,15 @@
 module Tractor
   module NewslettersHelper
 
+    def rprice_clean(text)
+      clean_price = text.split(/\s(\d*).00 HKD/)
+      if clean_price[4].include?('dozens')
+      clean_price = "<span style=\"font-size: 14px; color: #333; text-decoration:__line-through\">Rec. Retail Price #{clean_price[1]} HKD</span><br/><span style=\"color: #d12433; font-size: 16px; line-height: 24px; font-weight: bold;\">Discount Price #{clean_price[5]} HKD</span><br/><span style=\"font-size: 14px; color: #333; \">Save #{clean_price[1].to_i - clean_price[5].to_i} HKD</span>"
+      else
+      clean_price = "<span style=\"font-size: 14px; color: #333;\">#{clean_price[0]}</span><br/><span style=\"color: #de1825; font-size: 16px; font-weight: bold;\">#{clean_price[1]}</span>"
+
+      end
+    end
 
     def price_clean(text)
       clean_price = text.split('|')

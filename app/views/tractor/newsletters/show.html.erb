@@ -34,10 +34,9 @@
 
 <% unless @newsletter.template.is_liquid %>
   
-  <%= render :partial => 'tractor/newsletters/templates/template_2/newsletter' %> 
+  <%= render :partial => "tractor/newsletters/templates/template_#{@newsletter.template_id}/newsletter" %> 
 
 <% else %>
-  
   <%= @template.render('newsletter' => @newsletter).html_safe %>
 
 <% end %>

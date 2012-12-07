@@ -32,17 +32,31 @@ class ImageUploader < CarrierWave::Uploader::Base
  #   process :rotate_cw
   #end
 
-  # Create different versions of your uploaded files:
-  version :main do
-    process :resize_to_fit => [440, 185]
+  version :clocked do
+    process :rotate => 90
+    process :resize_and_pad => [318, 138, "#fff", Magick::CenterGravity]
   end
 
-  version :second do
-    process :resize_to_fit => [318, 320]
+  def rotate(rotation)
+    manipulate! do |img|
+      img = img.rotate(rotation)
+    end
   end
 
-  version :third do
-    process :resize_to_fit => [320, 135]
+  version :carousel do
+   process :resize_to_fill => [180,125]
+  end
+
+  version :full_preview do
+   process :resize_to_fill => [800,800]
+  end
+
+  version :small_thumb do
+   process :resize_to_fill => [160,120]
+  end
+
+  version :big_thumb do
+     process :resize_to_fill => [250,170]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

@@ -28,5 +28,25 @@ module Tractor
       render nothing: true
     end
 
+    def just_image
+      main_image.length >= 2 && body == '' && main_title == ''
+    end
+
+    def just_headline
+      body == '' && main_title.length >= 3 && main_image.length <= 2
+    end
+
+    def full_block
+      body.length >= 2 && main_title.length >= 2 && main_link.length >= 2
+    end
+
+    def text_only
+      body.length >= 2 && main_title.length >= 2 &&  main_image.length <= 2 && main_link == ''
+    end
+
+    def width
+      self.full_block ? 2 : 1
+    end
+
   end
 end

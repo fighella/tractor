@@ -84,8 +84,6 @@ gem 'daemons'
 
 gem 'liquid'
 
-gem 'tractor', :path => 'vendor/tractor'
-#gem 'tractor', '~> 0.0.2', :git => 'https://github.com/fighella/tractor.git'
-#gem 'sigs', :path => 'lib/gems/sigs'
+gem 'tractor', '0.0.2', :path => 'vendor/tractor'
 
 gem 'rb-fsevent', '~> 0.9.1'

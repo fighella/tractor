@@ -1,9 +1,3 @@
-[submodule "tractor"]
-  path = /lib/gems/tractor
-	url = https://fighella:inyourface1@github.com/fighella/tractor-gem
-[submodule "tractor-gem"]
-	path = tractor-gem
-	url = https://fighella:inyourface1@github.com/fighella/tractor-gem
 [submodule "lib/gems/tractor-gem"]
 	path = lib/gems/tractor-gem
 	url = https://git@heroku.com:tractor-gem.git

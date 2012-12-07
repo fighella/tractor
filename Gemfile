@@ -2,7 +2,7 @@ require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 
 source 'https://rubygems.org'
-
+ruby '1.9.2'
 gem 'rails', '3.2.7'
 
 # Gems used only for assets and not required

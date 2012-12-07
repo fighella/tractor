@@ -37,11 +37,8 @@ group :development do
   gem 'sqlite3'
 end
 
-
-
 gem "simple_form"
 gem "nested_form"
-
 gem "devise"
 gem 'carrierwave'
 gem 'fog'
@@ -52,13 +49,9 @@ gem 'friendly_id'
 gem 'foreman'
 gem 'RedCloth'
 gem 'draper'
-#gem 'heroku'
+gem 'heroku'
 gem 'pg'
 gem "mocha", :group => :test
-
-# Gem for talking to the Google Analytics API 
-# gem 'gattica', '>=0.3.3.4', :git => 'git://github.com/chrisle/gattica.git'
-
 
 # Homemade gems
 #gem 'sigs', :path => 'lib/gems/sigs'   
@@ -88,5 +81,4 @@ gem 'daemons'
 gem 'liquid'
 
 gem 'tractor', '0.0.2', :path => 'vendor/tractor'
-
 gem 'rb-fsevent', '~> 0.9.1'

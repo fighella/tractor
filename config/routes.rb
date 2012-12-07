@@ -1,27 +1,11 @@
-Tractor::Engine.routes.draw do
-  resources :newsletter_test_emails
+CellarMasterEmails::Application.routes.draw do
+  devise_for :users
 
-  get "dashboard/index"
+  get "home/index"
 
-  resources :templates
+  root :to => 'home#index'
 
-  
-  resources :newsletter_blocks do
-     get 'kill_block_image', on: :member
-  end
-  
-  match "/newsletters/send_test_email/(:id)" => 'newsletters#send_test_email'
-  
-  resources :newsletters 
-  
-  resources :newsletter_blocks do
-    collection { post :sort }
-  end
-  
-  resources :send_events
-
-  resources :campaigns
-  
-  root :to => "dashboard#index"
+  mount Tractor::Engine => '/emarketing', :as => 'tractor' 
+  mount Sigs::Engine => '/signatures', :as => 'sigs' 
 
 end

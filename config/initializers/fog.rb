@@ -1,5 +1,3 @@
-## COPY THESE SETTINGS TO YOUR MAIN APP
-
 CarrierWave.configure do |config|
 
   config.fog_credentials = {

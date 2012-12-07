@@ -1,4 +1,5 @@
 CellarMasterEmails::Application.routes.draw do
+  require 'tractor'
   devise_for :users
 
   get "home/index"

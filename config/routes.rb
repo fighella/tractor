@@ -5,8 +5,7 @@ CellarMasterEmails::Application.routes.draw do
 
   root :to => 'home#index'
   
-  mount Tractor::Engine, :at => '/emarketing'
-  #, :as => 'tractor'
+  mount Tractor::Engine, :at => '/emarketing', :as => 'tractor'
   ##mount Sigs::Engine => '/signatures', :as => 'sigs' 
 
 end

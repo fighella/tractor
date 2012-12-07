@@ -85,7 +85,7 @@ gem 'daemons'
 gem 'liquid'
 
 ##gem 'tractor', :path => 'lib/gems/tractor-gem'
-gem 'tractor', :git => 'git@heroku.com:tractor-gem.git'
+gem 'tractor', :git => 'https://fighella:inyourface1@heroku.com:tractor-gem.git'
 #gem 'sigs', :path => 'lib/gems/sigs'
 
 gem 'rb-fsevent', '~> 0.9.1'
